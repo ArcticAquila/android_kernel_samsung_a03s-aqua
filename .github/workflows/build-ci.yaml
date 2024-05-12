@@ -106,20 +106,20 @@ jobs:
               cd "Vanilla Flashable Zip"
               mv UPDATE-AnyKernel3.zip A03s-AnyKernel3-Vannila.zip
 
-        - name: Send output file into Telegram
-          uses: appleboy/telegram-action@master
-          if: contains(github.ref, 'main')
-          with:
-            to: ${{ secrets.TELEGRAM_TO }}
-            token: ${{ secrets.TELEGRAM_TOKEN }}
-            document: KernelSU Flashable Zip/A03s-AnyKernel3-KernelSU.zip,Vanilla Flashable Zip/A03s-AnyKernel3-Vanilla.zip
-            message: |
-                ${{ github.actor }} created commit:
-                Commit message: ${{ github.event.commits[0].message }}
+        #- name: Send output file into Telegram
+          #uses: appleboy/telegram-action@master
+          #if: contains(github.ref, 'main')
+          #with:
+            #to: ${{ secrets.TELEGRAM_TO }}
+            #token: ${{ secrets.TELEGRAM_TOKEN }}
+            #document: KernelSU Flashable Zip/A03s-AnyKernel3-KernelSU.zip,Vanilla Flashable Zip/A03s-AnyKernel3-Vanilla.zip
+            #message: |
+                #${{ github.actor }} created commit:
+                #Commit message: ${{ github.event.commits[0].message }}
 
-                Repository: <${{ github.repository }}>
+                #Repository: <${{ github.repository }}>
 
-                See changes: <https://github.com/${{ github.repository }}/commit/${{github.sha}}>
+                #See changes: <https://github.com/${{ github.repository }}/commit/${{github.sha}}>
 
         #- name: Upload file to sourceforge
           #uses: appleboy/scp-action@v0.1.7
