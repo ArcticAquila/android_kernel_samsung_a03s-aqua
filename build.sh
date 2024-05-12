@@ -7,12 +7,12 @@ fi
 
 # Set variable toolchain flags for building
 export CROSS_COMPILE=$(pwd)/toolchain/gcc/linux-x86/aarch64/aarch64-linux-android-4.9/bin/aarch64-buildroot-linux-gnu-
-export CC=$(pwd)/toolchain/clang/host/linux-x86/clang-r383902/bin/clang
+export CC=$(pwd)/toolchain/clang/host/linux-x86/clang-r416183b/bin/clang
 export CLANG_TRIPLE=aarch64-buildroot-linux-gnu-
 
 # Set variable arch flags for building
 export ARCH=arm64
-export SUBARCH="arm64"
+export SUBARCH=arm64
 
 # Set variable flags for building
 export KCFLAGS=-w
@@ -51,9 +51,9 @@ case $1 in
         $BASH_KBUILD_COMMAND -j$(nproc --all)
         ;;
     "clang")
-        wget -nc https://android.googlesource.com/platform/prebuilts/clang/host/linux-x86/+archive/fb69815b96ce8dd4821078dd36ac92dde80a23e1/clang-r383902.tar.gz
-        mkdir -pv toolchain/clang/host/linux-x86/clang-r383902/
-        tar xfv clang-r383902.tar.gz -C toolchain/clang/host/linux-x86/clang-r383902/
+        wget -nc https://android.googlesource.com/platform/prebuilts/clang/host/linux-x86/+archive/428d18d9732aa7ebfcaed87a582d86155db878d4/clang-r416183b.tar.gz
+        mkdir -pv toolchain/clang/host/linux-x86/clang-r416183b/
+        tar xfv clang-r416183b.tar.gz -C toolchain/clang/host/linux-x86/clang-r416183b/
         ;;
     "gcc")
         git clone --depth=1 https://github.com/ArcticAquila/toolchains toolchain/gcc/linux-x86/aarch64/aarch64-linux-android-4.9/
