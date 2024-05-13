@@ -67,7 +67,7 @@ case $1 in
         git apply ksu.patch
         ;;
     "prepare")
-        if [ -f "arch/arm64/config/aqua_defconfig" ]; then
+        if [ -f "arch/arm64/configs/aqua_defconfig" ]; then
             $BASH_KBUILD_COMMAND aqua_defconfig
         else
             $BASH_KBUILD_COMMAND a03s_defconfig
