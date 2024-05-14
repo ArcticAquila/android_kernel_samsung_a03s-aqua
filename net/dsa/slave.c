@@ -598,15 +598,13 @@ static int dsa_slave_get_sset_count(struct net_device *dev, int sset)
 	struct dsa_switch *ds = dp->ds;
 
 	if (sset == ETH_SS_STATS) {
-		int count = 0;
+		int count;
 
-		if (ds->ops->get_sset_count) {
-			count = ds->ops->get_sset_count(ds, dp->index, sset);
-			if (count < 0)
-				return count;
-		}
+		count = 4;
+		if (ds->ops->get_sset_count)
+			count += ds->ops->get_sset_count(ds, dp->index, sset);
 
-		return count + 4;
+		return count;
 	}
 
 	return -EOPNOTSUPP;

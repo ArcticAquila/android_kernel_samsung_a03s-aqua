@@ -702,6 +702,8 @@ static bool hns3_tunnel_csum_bug(struct sk_buff *skb)
 	if (!(!skb->encapsulation && l4.udp->dest == htons(IANA_VXLAN_PORT)))
 		return false;
 
+	skb_checksum_help(skb);
+
 	return true;
 }
 
@@ -762,7 +764,8 @@ static int hns3_set_l3l4_type_csum(struct sk_buff *skb, u8 ol4_proto,
 			/* the stack computes the IP header already,
 			 * driver calculate l4 checksum when not TSO.
 			 */
-			return skb_checksum_help(skb);
+			skb_checksum_help(skb);
+			return 0;
 		}
 
 		l3.hdr = skb_inner_network_header(skb);
@@ -793,7 +796,7 @@ static int hns3_set_l3l4_type_csum(struct sk_buff *skb, u8 ol4_proto,
 		break;
 	case IPPROTO_UDP:
 		if (hns3_tunnel_csum_bug(skb))
-			return skb_checksum_help(skb);
+			break;
 
 		hnae3_set_bit(*type_cs_vlan_tso, HNS3_TXD_L4CS_B, 1);
 		hnae3_set_field(*type_cs_vlan_tso,
@@ -818,7 +821,8 @@ static int hns3_set_l3l4_type_csum(struct sk_buff *skb, u8 ol4_proto,
 		/* the stack computes the IP header already,
 		 * driver calculate l4 checksum when not TSO.
 		 */
-		return skb_checksum_help(skb);
+		skb_checksum_help(skb);
+		return 0;
 	}
 
 	return 0;
